@@ -1,6 +1,7 @@
-export { default as AreaChart } from "./AreaChart.vue"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Spacing } from '@unovis/ts'
 
-import type { Spacing } from "@unovis/ts"
+export { default as AreaChart } from './AreaChart.vue'
 
 type KeyOf<T extends Record<string, any>> = Extract<keyof T, string>
 
@@ -33,11 +34,19 @@ export interface BaseChartProps<T extends Record<string, any>> {
   /**
    * Function to format X label
    */
-  xFormatter?: (tick: number | Date, i: number, ticks: number[] | Date[]) => string
+  xFormatter?: (
+    tick: number | Date,
+    i: number,
+    ticks: number[] | Date[]
+  ) => string
   /**
    * Function to format Y label
    */
-  yFormatter?: (tick: number | Date, i: number, ticks: number[] | Date[]) => string
+  yFormatter?: (
+    tick: number | Date,
+    i: number,
+    ticks: number[] | Date[]
+  ) => string
   /**
    * Controls the visibility of the X axis.
    * @default true

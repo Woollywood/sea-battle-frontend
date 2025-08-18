@@ -1,4 +1,4 @@
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -9,7 +9,14 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', 'shadcn-nuxt', '@vueuse/nuxt'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxt/image',
+    'shadcn-nuxt',
+    '@vueuse/nuxt',
+  ],
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -21,4 +28,4 @@ export default defineNuxtConfig({
      */
     componentDir: '~/components/ui',
   },
-});
+})

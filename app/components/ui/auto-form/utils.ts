@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { z } from 'zod'
 
 // TODO: This should support recursive ZodEffects but TypeScript doesn't allow circular type definitions.
@@ -12,7 +13,9 @@ export type ZodObjectOrWrapped =
 export function beautifyObjectName(string: string) {
   // Remove bracketed indices
   // if numbers only return the string
-  let output = string.replace(/\[\d+\]/g, '').replace(/([A-Z])/g, ' $1')
+  let output = string
+    .replace(/\[\d+\]/g, '')
+    .replace(/([A-Z])/g, ' $1')
   output = output.charAt(0).toUpperCase() + output.slice(1)
   return output
 }
@@ -27,7 +30,7 @@ export function getIndexIfArray(string: string) {
   // Match the index
   const match = string.match(indexRegex)
   // Extract the index (number)
-  const index = match ? Number.parseInt(match[1]) : undefined
+  const index = match ? Number.parseInt(match[1]!) : undefined
   return index
 }
 
@@ -38,8 +41,7 @@ export function getIndexIfArray(string: string) {
 export function getBaseSchema<
   ChildType extends z.ZodAny | z.AnyZodObject = z.ZodAny,
 >(schema: ChildType | z.ZodEffects<ChildType>): ChildType | null {
-  if (!schema)
-    return null
+  if (!schema) return null
   if ('innerType' in schema._def)
     return getBaseSchema(schema._def.innerType as ChildType)
 
@@ -71,12 +73,12 @@ export function getDefaultValueInZodStack(schema: z.ZodAny): any {
 
   if ('innerType' in typedSchema._def) {
     return getDefaultValueInZodStack(
-      typedSchema._def.innerType as unknown as z.ZodAny,
+      typedSchema._def.innerType as unknown as z.ZodAny
     )
   }
   if ('schema' in typedSchema._def) {
     return getDefaultValueInZodStack(
-      (typedSchema._def as any).schema as z.ZodAny,
+      (typedSchema._def as any).schema as z.ZodAny
     )
   }
 
@@ -84,7 +86,7 @@ export function getDefaultValueInZodStack(schema: z.ZodAny): any {
 }
 
 export function getObjectFormSchema(
-  schema: ZodObjectOrWrapped,
+  schema: ZodObjectOrWrapped
 ): z.ZodObject<any, any> {
   if (schema?._def.typeName === 'ZodEffects') {
     const typedSchema = schema as z.ZodEffects<z.ZodObject<any, any>>
@@ -101,8 +103,7 @@ function isIndex(value: unknown): value is number {
  */
 export function normalizeFormPath(path: string): string {
   const pathArr = path.split('.')
-  if (!pathArr.length)
-    return ''
+  if (!pathArr.length) return ''
 
   let fullPath = String(pathArr[0])
   for (let i = 1; i < pathArr.length; i++) {
@@ -117,7 +118,9 @@ export function normalizeFormPath(path: string): string {
   return fullPath
 }
 
-type NestedRecord = Record<string, unknown> | { [k: string]: NestedRecord }
+type NestedRecord =
+  | Record<string, unknown>
+  | { [k: string]: NestedRecord }
 /**
  * Checks if the path opted out of nested fields using `[fieldName]` syntax
  */
@@ -125,14 +128,20 @@ export function isNotNestedPath(path: string) {
   return /^\[.+\]$/.test(path)
 }
 function isObject(obj: unknown): obj is Record<string, unknown> {
-  return obj !== null && !!obj && typeof obj === 'object' && !Array.isArray(obj)
+  return (
+    obj !== null &&
+    !!obj &&
+    typeof obj === 'object' &&
+    !Array.isArray(obj)
+  )
 }
-function isContainerValue(value: unknown): value is Record<string, unknown> {
+function isContainerValue(
+  value: unknown
+): value is Record<string, unknown> {
   return isObject(value) || Array.isArray(value)
 }
 function cleanupNonNestedPath(path: string) {
-  if (isNotNestedPath(path))
-    return path.replace(/\[|\]/g, '')
+  if (isNotNestedPath(path)) return path.replace(/\[|\]/g, '')
 
   return path
 }
@@ -140,19 +149,21 @@ function cleanupNonNestedPath(path: string) {
 /**
  * Gets a nested property value from an object
  */
-export function getFromPath<TValue = unknown>(object: NestedRecord | undefined, path: string): TValue | undefined
+export function getFromPath<TValue = unknown>(
+  object: NestedRecord | undefined,
+  path: string
+): TValue | undefined
 export function getFromPath<TValue = unknown, TFallback = TValue>(
   object: NestedRecord | undefined,
   path: string,
-  fallback?: TFallback,
+  fallback?: TFallback
 ): TValue | TFallback
 export function getFromPath<TValue = unknown, TFallback = TValue>(
   object: NestedRecord | undefined,
   path: string,
-  fallback?: TFallback,
+  fallback?: TFallback
 ): TValue | TFallback | undefined {
-  if (!object)
-    return fallback
+  if (!object) return fallback
 
   if (isNotNestedPath(path))
     return object[cleanupNonNestedPath(path)] as TValue | undefined
@@ -161,8 +172,7 @@ export function getFromPath<TValue = unknown, TFallback = TValue>(
     .split(/\.|\[(\d+)\]/)
     .filter(Boolean)
     .reduce((acc, propKey) => {
-      if (isContainerValue(acc) && propKey in acc)
-        return acc[propKey]
+      if (isContainerValue(acc) && propKey in acc) return acc[propKey]
 
       return fallback
     }, object as unknown)

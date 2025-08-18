@@ -1,7 +1,10 @@
+<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts" generic="U extends ZodAny">
 import type { ZodAny } from 'zod'
 import type { Config, ConfigItem, Shape } from './interface'
+
 import { computed } from 'vue'
+
 import { DEFAULT_ZOD_HANDLERS, INPUT_COMPONENTS } from './constant'
 import useDependencies from './dependencies'
 
@@ -21,16 +24,20 @@ const delegatedProps = computed(() => {
   return undefined
 })
 
-const { isDisabled, isHidden, isRequired, overrideOptions } = useDependencies(props.fieldName)
+const { isDisabled, isHidden, isRequired, overrideOptions } =
+  useDependencies(props.fieldName)
 </script>
 
 <template>
   <component
-    :is="isValidConfig(config)
-      ? typeof config.component === 'string'
-        ? INPUT_COMPONENTS[config.component!]
-        : config.component
-      : INPUT_COMPONENTS[DEFAULT_ZOD_HANDLERS[shape.type]] "
+    :is="
+      isValidConfig(config)
+        ? typeof config.component === 'string'
+          ? INPUT_COMPONENTS[config.component!]
+          : config.component
+        : // @ts-ignore
+          INPUT_COMPONENTS[DEFAULT_ZOD_HANDLERS[shape.type]]
+    "
     v-if="!isHidden"
     :field-name="fieldName"
     :label="shape.schema?.description"
