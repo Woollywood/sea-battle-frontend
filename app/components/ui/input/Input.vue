@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
+import type { IInputProps } from './types'
 
 import { useVModel } from '@vueuse/core'
 
 import { cn } from '@/lib/utils'
 
-const props = defineProps<{
-  defaultValue?: string | number
-  modelValue?: string | number
-  class?: HTMLAttributes['class']
-}>()
+const props = defineProps<IInputProps>()
 
 const emits = defineEmits<{
   (e: 'update:modelValue', payload: string | number): void

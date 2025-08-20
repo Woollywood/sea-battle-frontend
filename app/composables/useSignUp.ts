@@ -4,7 +4,10 @@ import {
 } from '~/api/generated'
 
 export const useSignUp = () => {
-  const { mutateAsync: mutate } = useAuthControllerSignUp()
+  const { $publicApi } = useNuxtApp()
+  const { mutateAsync: mutate } = useAuthControllerSignUp({
+    client: { client: $publicApi },
+  })
   const { signIn } = useSignIn()
 
   const onSignUp = async (data: SignUpDto) => {

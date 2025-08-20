@@ -1,24 +1,8 @@
 <template>
   <form @submit="onSubmit">
     <div class="mb-8 flex flex-col gap-4">
-      <FormField v-slot="{ componentField }" name="email">
-        <FormItem>
-          <FormLabel>Email</FormLabel>
-          <FormControl>
-            <Input v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
-      <FormField v-slot="{ componentField }" name="password">
-        <FormItem>
-          <FormLabel>Password</FormLabel>
-          <FormControl>
-            <Input type="password" v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
+      <Input name="email" label="Email" />
+      <Input name="password" label="Password" />
     </div>
     <div>
       <Button :disabled="isSubmitting" class="w-full">Sign in</Button>
@@ -31,6 +15,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 
 import { signInSchema } from '@/schemas/signInSchema'
+import Input from '~/components/shared/form/Input.vue'
 
 const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(signInSchema),

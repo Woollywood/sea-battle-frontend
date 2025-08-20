@@ -8,13 +8,13 @@ import {
   authControllerRefreshToken,
   type TokensDto,
 } from '~/api/generated'
-import { createAxiosInstance } from '~/api/helpers'
 
 export const useApiInterceptors = () => {
   const refreshPromis = ref<Promise<void> | null>(null)
 
+  const { $publicApi } = useNuxtApp()
   const {
-    public: { apiEndpoint, signInUrl },
+    public: { signInUrl },
   } = useRuntimeConfig()
   const { fullPath } = useRoute()
   const { tokens, isAuth, setAuthTokens, clearAuthTokens } = useAuth()
@@ -26,14 +26,11 @@ export const useApiInterceptors = () => {
       // eslint-disable-next-line no-async-promise-executor
       async (resolve, reject) => {
         try {
-          const publicClient = createAxiosInstance({
-            baseURL: apiEndpoint,
-          })
           const tokens = await authControllerRefreshToken(
             {
               refreshToken,
             },
-            { client: publicClient }
+            { client: $publicApi }
           )
           setAuthTokens(tokens)
         } catch (error) {

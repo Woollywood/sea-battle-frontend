@@ -4,8 +4,11 @@ import {
 } from '~/api/generated'
 
 export const useSignIn = () => {
+  const { $publicApi } = useNuxtApp()
   const { query } = useRoute()
-  const { mutateAsync: mutate } = useAuthControllerSignIn()
+  const { mutateAsync: mutate } = useAuthControllerSignIn({
+    client: { client: $publicApi },
+  })
   const { setAuthTokens } = useAuth()
 
   const redirect = () => {

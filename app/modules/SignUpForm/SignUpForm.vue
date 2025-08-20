@@ -1,42 +1,18 @@
 <template>
   <form @submit="onSubmit">
     <div class="mb-8 flex flex-col gap-4">
-      <FormField v-slot="{ componentField }" name="username">
-        <FormItem>
-          <FormLabel>Username</FormLabel>
-          <FormControl>
-            <Input v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
-      <FormField v-slot="{ componentField }" name="email">
-        <FormItem>
-          <FormLabel>Email</FormLabel>
-          <FormControl>
-            <Input v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
-      <FormField v-slot="{ componentField }" name="password">
-        <FormItem>
-          <FormLabel>Password</FormLabel>
-          <FormControl>
-            <Input type="password" v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
-      <FormField v-slot="{ componentField }" name="confirmPassword">
-        <FormItem>
-          <FormLabel>Confirm Password</FormLabel>
-          <FormControl>
-            <Input type="password" v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
+      <Input
+        name="username"
+        label="Username"
+        placeholder="Username"
+      />
+      <Input name="email" label="Email" placeholder="Email" />
+      <Input name="password" type="password" label="Password" />
+      <Input
+        name="confirmPassword"
+        type="password"
+        label="Confirm Password"
+      />
     </div>
     <div>
       <Button :disabled="isSubmitting" class="w-full">Sign up</Button>
@@ -49,6 +25,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 
 import { signUpSchema } from '@/schemas/signUpSchema'
+import Input from '~/components/shared/form/Input.vue'
 
 const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(signUpSchema),
