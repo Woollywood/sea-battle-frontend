@@ -8,6 +8,16 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  runtimeConfig: {
+    public: {
+      baseURL: '',
+      apiEndpoint: '',
+      signInUrl: '',
+      signUpUrl: '',
+      authRedirectUrl: '',
+      sessionPassword: '',
+    },
+  },
 
   modules: [
     '@nuxt/eslint',
