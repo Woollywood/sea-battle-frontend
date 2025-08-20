@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import AuthCard from '~/components/shared/AuthCard.vue'
-import SignInForm from '~/modules/SignInForm/SignInForm.vue'
+import { AuthCard } from '~/components/shared/AuthCard'
+import { SignInForm } from '~/modules/SignInForm'
 
 definePageMeta({
   layout: 'auth',

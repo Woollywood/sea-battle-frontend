@@ -15,7 +15,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 
 import { signInSchema } from '@/schemas/signInSchema'
-import Input from '~/components/shared/form/Input.vue'
+import { Input } from '~/components/shared/form/Input'
 
 const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(signInSchema),
