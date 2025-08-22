@@ -1,3 +1,3 @@
 export const validationPhrases = {
-  required: 'Required',
+  required: 'Обязательно для заполнения',
 }

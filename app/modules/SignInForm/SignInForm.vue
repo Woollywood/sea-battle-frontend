@@ -1,8 +1,11 @@
 <template>
   <form @submit="onSubmit">
     <div class="mb-8 flex flex-col gap-4">
-      <Input name="email" label="Email" />
-      <Input name="password" label="Password" />
+      <Input
+        name="username"
+        label="Username"
+        placeholder="Username"
+      />
     </div>
     <div>
       <Button :disabled="isSubmitting" class="w-full">Sign in</Button>
@@ -23,7 +26,9 @@ const { handleSubmit, isSubmitting } = useForm({
 
 const { signIn } = useSignIn()
 
-const onSubmit = handleSubmit(signIn)
+const onSubmit = handleSubmit(async ({ username }) => {
+  await signIn({ username }, '/')
+})
 </script>
 
 <style scoped></style>

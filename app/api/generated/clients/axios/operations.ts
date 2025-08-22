@@ -1,5 +1,7 @@
+ 
+ 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-
+ 
 // @ts-nocheck
 
 /**
@@ -19,14 +21,6 @@ export const operations = {
   AuthController_signOut: {
     path: '/api/v1/auth/sign-out',
     method: 'post',
-  },
-  AuthController_googleProvider: {
-    path: '/api/v1/auth/providers/google',
-    method: 'get',
-  },
-  AuthController_googleCallback: {
-    path: '/api/v1/auth/google/callback',
-    method: 'get',
   },
   AuthController_refreshToken: {
     path: '/api/v1/auth/refresh',

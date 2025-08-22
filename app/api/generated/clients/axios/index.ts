@@ -1,5 +1,3 @@
-export { authControllerGoogleCallback } from './AuthService/authControllerGoogleCallback.ts'
-export { authControllerGoogleProvider } from './AuthService/authControllerGoogleProvider.ts'
 export { authControllerIdentity } from './AuthService/authControllerIdentity.ts'
 export { authControllerRefreshToken } from './AuthService/authControllerRefreshToken.ts'
 export { authControllerSignIn } from './AuthService/authControllerSignIn.ts'

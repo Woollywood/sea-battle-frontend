@@ -1,16 +1,4 @@
 export type {
-  AuthControllerGoogleCallbackQueryParams,
-  AuthControllerGoogleCallback200,
-  AuthControllerGoogleCallbackQueryResponse,
-  AuthControllerGoogleCallbackQuery,
-} from './AuthController/AuthControllerGoogleCallback.ts'
-export type {
-  AuthControllerGoogleProviderQueryParams,
-  AuthControllerGoogleProvider200,
-  AuthControllerGoogleProviderQueryResponse,
-  AuthControllerGoogleProviderQuery,
-} from './AuthController/AuthControllerGoogleProvider.ts'
-export type {
   AuthControllerIdentity200,
   AuthControllerIdentityQueryResponse,
   AuthControllerIdentityQuery,

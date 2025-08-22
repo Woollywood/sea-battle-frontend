@@ -1,18 +1,9 @@
 <template>
   <header class="flex items-center justify-between gap-12 py-6">
-    <NuxtLink to="/">Home</NuxtLink>
+    <h1 class="text-4xl font-bold">Морской бой</h1>
     <div class="flex items-center gap-2">
-      <template v-if="isAuth">
-        <Button @click="signOut">Sign out</Button>
-      </template>
-      <template v-else>
-        <Button as-child>
-          <NuxtLink to="/auth/sign-in">Sign in</NuxtLink>
-        </Button>
-        <Button as-child>
-          <NuxtLink to="/auth/sign-up">Sign up</NuxtLink>
-        </Button>
-      </template>
+      <Button v-if="isAuth" @click="signOut">Выход</Button>
+      <!-- <Button v-else @click="signOut">Войти</Button> -->
     </div>
   </header>
 </template>

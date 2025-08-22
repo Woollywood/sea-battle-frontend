@@ -1,5 +1,7 @@
+ 
+ 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-
+ 
 // @ts-nocheck
 
 /**
@@ -7,8 +9,6 @@
  * Do not edit manually.
  */
 
-import { authControllerGoogleCallback } from './authControllerGoogleCallback.ts'
-import { authControllerGoogleProvider } from './authControllerGoogleProvider.ts'
 import { authControllerIdentity } from './authControllerIdentity.ts'
 import { authControllerRefreshToken } from './authControllerRefreshToken.ts'
 import { authControllerSignIn } from './authControllerSignIn.ts'
@@ -20,8 +20,6 @@ export function authService() {
     authControllerSignUp,
     authControllerSignIn,
     authControllerSignOut,
-    authControllerGoogleProvider,
-    authControllerGoogleCallback,
     authControllerRefreshToken,
     authControllerIdentity,
   }

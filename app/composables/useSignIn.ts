@@ -1,3 +1,5 @@
+import { toast } from 'vue-sonner'
+
 import {
   type SignInDto,
   useAuthControllerSignIn,
@@ -5,30 +7,24 @@ import {
 
 export const useSignIn = () => {
   const { $publicApi } = useNuxtApp()
-  const { query } = useRoute()
+  const { redirect } = useRedirect()
   const { mutateAsync: mutate } = useAuthControllerSignIn({
     client: { client: $publicApi },
+    mutation: {
+      onError(error) {
+        toast('Sign in failed', {
+          description:
+            error.response?.data.message ?? 'Unknown error',
+        })
+      },
+    },
   })
   const { setAuthTokens } = useAuth()
 
-  const redirect = () => {
-    if (query.redirectUrl) {
-      navigateTo(
-        decodeURIComponent(
-          (Array.isArray(query.redirectUrl)
-            ? query.redirectUrl[0]
-            : query.redirectUrl) ?? ''
-        )
-      )
-    } else {
-      navigateTo('/')
-    }
-  }
-
-  const signIn = async (data: SignInDto) => {
-    const tokens = await mutate({ data })
+  const signIn = async (dto: SignInDto, redirectURL: string) => {
+    const tokens = await mutate({ data: dto })
     setAuthTokens(tokens)
-    redirect()
+    redirect(redirectURL)
   }
 
   return { signIn }

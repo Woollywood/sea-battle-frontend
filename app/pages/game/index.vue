@@ -1,9 +1,11 @@
 <template>
-  <Welcome />
+  <div>game</div>
 </template>
 
 <script setup lang="ts">
-import { Welcome } from '~/modules/Welcome'
+definePageMeta({
+  middleware: 'auth',
+})
 </script>
 
 <style scoped></style>

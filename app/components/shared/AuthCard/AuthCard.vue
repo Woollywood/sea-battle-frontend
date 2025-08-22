@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2 class="mb-3 text-4xl font-bold text-black">{{ title }}</h2>
-    <p class="mb-8 text-lg text-gray-500">{{ description }}</p>
+    <h2 class="mb-8 text-4xl font-bold text-black">{{ title }}</h2>
     <div class="space-y-8">
       <slot />
       <div class="text-center">
@@ -14,10 +13,9 @@
 <script setup lang="ts">
 interface IAuthCardProps {
   title: string
-  description: string
 }
 
-const { title, description } = defineProps<IAuthCardProps>()
+const { title } = defineProps<IAuthCardProps>()
 </script>
 
 <style scoped></style>

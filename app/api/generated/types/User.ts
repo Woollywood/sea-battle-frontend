@@ -1,5 +1,7 @@
+ 
+ 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-
+ 
 // @ts-nocheck
 
 /**
@@ -30,12 +32,7 @@ export type User = {
   /**
    * @type string
    */
-  email: string
-  /**
-   * @minLength 5
-   * @type string
-   */
-  password: string
+  email: string | null
   /**
    * @type array | undefined
    */

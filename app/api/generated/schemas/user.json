@@ -5,20 +5,12 @@
     "createdAt": { "type": "string", "format": "date-time" },
     "updatedAt": { "type": "string", "format": "date-time" },
     "username": { "type": "string", "minimum": 3, "minLength": 3 },
-    "email": { "type": "string" },
-    "password": { "type": "string", "minimum": 5, "minLength": 5 },
+    "email": { "type": "string", "nullable": true },
     "sessions": {
       "type": "array",
       "items": { "$ref": "#/components/schemas/Session" }
     }
   },
-  "required": [
-    "id",
-    "createdAt",
-    "updatedAt",
-    "username",
-    "email",
-    "password"
-  ],
+  "required": ["id", "createdAt", "updatedAt", "username", "email"],
   "x-readme-ref-name": "User"
 }

@@ -1,11 +1,16 @@
 <template>
   <div class="flex min-h-screen w-full items-center justify-center">
-    <div>
+    <main class="w-full max-w-96">
       <slot />
-    </div>
+    </main>
+    <Toaster />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import 'vue-sonner/style.css'
+
+import { Toaster } from '@/components/ui/sonner'
+</script>
 
 <style scoped></style>

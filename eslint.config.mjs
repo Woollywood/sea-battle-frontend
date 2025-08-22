@@ -8,6 +8,8 @@ export default withNuxt({
   rules: {
     // 'import/no-cycle': 'warn',
     'vue/require-default-prop': 'off',
+    'vue/multi-word-component-names': 'off',
+    'vue/html-self-closing': 'off',
     'simple-import-sort/imports': [
       'error',
       {

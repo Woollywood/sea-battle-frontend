@@ -1,5 +1,7 @@
+ 
+ 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-
+ 
 // @ts-nocheck
 
 /**
@@ -13,13 +15,4 @@ export type SignUpDto = {
    * @type string
    */
   username: string
-  /**
-   * @minLength 5
-   * @type string
-   */
-  password: string
-  /**
-   * @type string
-   */
-  email: string
 }
